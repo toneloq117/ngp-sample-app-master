@@ -1,7 +1,6 @@
 node_modules
 server.cert
 server.key
-.env
 local-storage
 .DS_Store
 **/.DS_Store
