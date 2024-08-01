@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home | Badger Parts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/product-style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/fontawesome.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="/lib/cartUtils.js" type="text/javascript"/>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <%- include('header', {totalItemsInCart: totalItemsInCart, categories: categories, activeCategoryName: "", page: ""}) %>
+        <div class="container">
+            <div class="mt-4">
+            </div>
+            <div class="product-page mb-5" itemscope="" itemtype="//schema.org/Product">
+                <div class="row">
+                    <div class="col-md-6">
+                        <% if (product.displayUrl) {%>
+                        <div class="product-gallery d-none d-md-flex">
+                            <ul class="product-gallery__thumbs list-unstyled">
+                                <li class="product-gallery__thumb active"><a href="#" class="product-small-box"><span
+                                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
+                                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
+                                                    alt="" aria-hidden="true"
+                                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9Ijc1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIvPg=="
+                                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span><img
+                                                alt="<%= product.name %>" srcset="<%= product.displayUrl %>"
+                                                src="<%= product.displayUrl %>" decoding="async" data-nimg="intrinsic"
+                                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></span></a>
+                                    <meta itemprop="image"
+                                        content="https://media.boundless-commerce.com/thumb/i1753/images/190af58f1a314e4a05f3a84f9ede4193.jpg?mode=scale&amp;max-size=400&amp;ratio=1-1&amp;pad=1">
+                                </li>
+                            </ul>
+                            <figure class="product-gallery__big-img"><a href="#"><span
+                                        style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
+                                            style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
+                                                alt="" aria-hidden="true"
+                                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzEyIiBoZWlnaHQ9IjUzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                                                style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span><img
+                                            srcset="<%= product.displayUrl %>" src="<%= product.displayUrl %>"
+                                            decoding="async" data-nimg="intrinsic"
+                                            style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></span></a>
+                                <meta itemprop="image"
+                                    content="https://media.boundless-commerce.com/thumb/i1753/images/190af58f1a314e4a05f3a84f9ede4193.jpg?mode=scale&amp;max-size=400&amp;ratio=1-1&amp;pad=1">
+                                <figcaption></figcaption>
+                            </figure>
+                        </div>
+                        <div class="d-block d-md-none">
+                            <div class="slider mb-5">
+                                <div class="slider__wrapper">
+                                    <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events">
+                                        <div class="swiper-button-prev"></div>
+                                        <div class="swiper-button-next"></div>
+                                        <div
+                                            class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        </div>
+                                        <div class="swiper-wrapper" style="cursor: grab; transition-duration: 0ms;">
+                                            <div class="swiper-slide"><span
+                                                    style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
+                                                        style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"><img
+                                                            alt="" aria-hidden="true"
+                                                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzEyIiBoZWlnaHQ9IjUzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                                                            style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"></span><img
+                                                        srcset="/_next/image?url=https%3A%2F%2Fmedia.boundless-commerce.com%2Fthumb%2Fi1753%2Fimages%2F190af58f1a314e4a05f3a84f9ede4193.jpg%3Fmode%3Dscale%26max-size%3D800&amp;w=750&amp;q=100 1x, /_next/image?url=https%3A%2F%2Fmedia.boundless-commerce.com%2Fthumb%2Fi1753%2Fimages%2F190af58f1a314e4a05f3a84f9ede4193.jpg%3Fmode%3Dscale%26max-size%3D800&amp;w=1920&amp;q=100 2x"
+                                                        src="/_next/image?url=https%3A%2F%2Fmedia.boundless-commerce.com%2Fthumb%2Fi1753%2Fimages%2F190af58f1a314e4a05f3a84f9ede4193.jpg%3Fmode%3Dscale%26max-size%3D800&amp;w=1920&amp;q=100"
+                                                        decoding="async" data-nimg="intrinsic"
+                                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } else {%>
+                            <div class="dummyImg"></div>
+                        <% } %>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="product-page__header mb-4" itemprop="name">
+                            <%= product.name %>
+                        </h1>
+                        <div class="variant-and-buy">
+                            <div class="price-and-buy">
+                                <!--<p>SKU: <span class="text-muted"></span>
+                                    <%= product.id %>
+                                </p>-->
+                                <div class="price-and-buy__2-cart">
+                                    <div class="price-and-buy__btns mt-3">
+                                        <button id="addToCartBtn" 
+                                            data-product-id="<%= product.id %>"
+                                            data-product-name="<%= product.name %>"
+                                            data-product-display-url="<%= product.displayUrl %>"
+                                            class="btn btn-primary">
+                                            <svg aria-hidden="true"
+                                                focusable="false" data-prefix="fas" data-icon="cart-plus"
+                                                class="svg-inline--fa fa-cart-plus fa-w-18 " role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="50" height="20">
+                                                <path fill="currentColor"
+                                                    d="M504.717 320H211.572l6.545 32h268.418c15.401 0 26.816 14.301 23.403 29.319l-5.517 24.276C523.112 414.668 536 433.828 536 456c0 31.202-25.519 56.444-56.824 55.994-29.823-.429-54.35-24.631-55.155-54.447-.44-16.287 6.085-31.049 16.803-41.548H231.176C241.553 426.165 248 440.326 248 456c0 31.813-26.528 57.431-58.67 55.938-28.54-1.325-51.751-24.385-53.251-52.917-1.158-22.034 10.436-41.455 28.051-51.586L93.883 64H24C10.745 64 0 53.255 0 40V24C0 10.745 10.745 0 24 0h102.529c11.401 0 21.228 8.021 23.513 19.19L159.208 64H551.99c15.401 0 26.816 14.301 23.403 29.319l-47.273 208C525.637 312.246 515.923 320 504.717 320zM408 168h-48v-40c0-8.837-7.163-16-16-16h-16c-8.837 0-16 7.163-16 16v40h-48c-8.837 0-16 7.163-16 16v16c0 8.837 7.163 16 16 16h48v40c0 8.837 7.163 16 16 16h16c8.837 0 16-7.163 16-16v-40h48c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16z">
+                                                </path>
+                                            </svg>
+                                             Add to Cart
+                                        </button>
+                                    </div>
+                                    <article itemprop="description" class="description fs-6">
+                                        <p><%= product.description %></p>
+                                    </article>
+                                    <p class="price-and-buy__stock in fs-6">In stock</p>
+                                    <div class="price-and-buy__qty input-group">
+                                        <button type="button" class="btn btn-secondary text-center" id="decrement-count"><svg
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="minus" class="svg-inline--fa fa-minus fa-w-14 "
+                                                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="20">
+                                                <path fill="currentColor"
+                                                    d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <input type="number" name="inputValue" id="productCount" class="form-control" min="1" value="1">
+                                        <button type="button" class="btn btn-secondary text-center" id="increment-count"><svg
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="plus" class="svg-inline--fa fa-plus fa-w-14 " role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="20">
+                                                <path fill="currentColor"
+                                                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="addToCartError"></div>
+                                <div id="addToCartSuccess"></div>
+                            </div>
+                        </div>
+                        <hr class="product-page__hr">
+                        <div class="variant-and-buy__variants">
+                            <% for (let i=0; i<product.attributeCategory.length; i++) {%>
+                                <% for (let j=0; j<product.attributeCategory[i].attributes.length; j++) {%>
+                                    <% if (product.attributeCategory[i].attributes[j].isPriceImpacting) {%>
+                                        <div class="variant-picker">
+                                            <div class="variant-picker__characteristic">
+                                                <div class="variant-picker__title">
+                                                    <%= product.attributeCategory[i].name %> - <%= product.attributeCategory[i].attributes[j].attributeNameOverride %>:
+                                                </div>
+                                                <div class="variant-picker__cases">
+                                                    <% if (product.attributeCategory[i].attributes[j].picklist) {%>
+                                                        <% for (let k=0; k<product.attributeCategory[i].attributes[j].picklist.values.length; k++) {%>
+                                                            <div class="variant-picker__case-item">
+                                                                <a href="#" 
+                                                                    data-product-attribute-name="<%= product.attributeCategory[i].attributes[j].name %>"
+                                                                    data-product-attribute-value="<%= product.attributeCategory[i].attributes[j].picklist.values[k].displayValue %>"
+                                                                    class="attribute-tile tile-small btn btn-outline-secondary">
+                                                                    <span><%=  product.attributeCategory[i].attributes[j].picklist.values[k].displayValue %></span>
+                                                                </a>
+                                                            </div>
+                                                        <% } %>
+                                                    <% } else {%>
+                                                        <div class="variant-picker__case-item">
+                                                            <a href="#" class="default-tile tile-small active btn btn-outline-secondary" 
+                                                                data-product-attribute-default-name="<%= product.attributeCategory[i].attributes[j].name %>"
+                                                                data-product-attribute-default-value="<%= product.attributeCategory[i].attributes[j].defaultValue %>">
+                                                                <span><%=  product.attributeCategory[i].attributes[j].defaultValue %></span>
+                                                            </a>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% if(j<product.attributeCategory[i].attributes.length-1 || i<product.attributeCategory.length-1) {%>
+                                            <hr class="product-page__hr">
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <div class="variant-and-buy__variants">
+                            <div class="variant-picker">
+                                <div class="variant-picker__characteristic">                                        
+                                    <div class="variant-picker__title">
+                                        PSM
+                                    </div>
+                            <% for (let i=0; i<product.productSellingModelOptions.length; i++) {%>
+                                    <% if (product.productSellingModelOptions[i].productSellingModel) {%>
+                                            <div class="variant-picker__cases">
+                                                <div class="variant-picker__case-item">
+                                                    <a href="#" 
+                                                            data-product-psm-name="<%= product.productSellingModelOptions[i].productSellingModel.name %>"
+                                                            data-product-psm-id="<%= product.productSellingModelOptions[i].productSellingModel.id %>"
+                                                            class="tile-psm tile tile-small btn btn-outline-secondary">
+                                                            <span><%=  product.productSellingModelOptions[i].productSellingModel.name %></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                    <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.querySelector('#increment-count').addEventListener('click', () => {
+            const productCountEl = document.querySelector('#productCount');
+            const productCount = Number(productCountEl.value);
+            if(!isNaN(productCount)) {
+                productCountEl.value = productCount+1;
+            }
+        });
+        document.querySelector('#decrement-count').addEventListener('click', () => {
+            const productCountEl = document.querySelector('#productCount');
+            const productCount = Number(productCountEl.value);
+            if(!isNaN(productCount) && productCount > 1) {
+                productCountEl.value = productCount-1;
+            }
+        });
+        document.getElementById('addToCartBtn').addEventListener('click', async function() {
+            const toast = document.querySelector('#toast');
+            // if there were picklist attributes AND no selections were made then block add-to-cart
+            if (tiles.length > 0 && !attributeSelected) {
+                showToastMessage("Please select an attribute.", "error");
+                return;
+            }
+
+            if (psmTiles.length > 0 && !psmSelected) {
+                showToastMessage("Please select a PSM.", "error");
+                return;
+            }
+
+            const productId = this.dataset.productId;
+            const productName = this.dataset.productName;
+            const productDisplayUrl = this.dataset.productDisplayUrl;
+            const productCount = document.getElementById('productCount').value;
+            const attributeDefinitions = Array.from(attributeDefinitionMap, ([name, value]) => ({ name, value }));
+            const psmSelection = Array.from(psmMap, ([name, value]) => ({ name, value }));
+            const cartItemsCount = await addToCart(productId, productName, productDisplayUrl, productCount, attributeDefinitions, psmSelection);
+
+            document.getElementById('cartItemsCount').innerText = cartItemsCount;
+            showToastMessage("Added to cart.", "success");
+        });
+
+        // storing picklist values
+        const tiles = document.querySelectorAll('.attribute-tile');
+
+        
+        let attributeDefinitionMap = new Map();
+        let attributeSelected = false;
+        if (tiles) {
+            tiles.forEach((tile) => {
+                tile.addEventListener('click', () => {
+                    tiles.forEach((tile) => {
+                    tile.classList.remove("active");
+                });
+                attributeDefinitionMap.set(tile.getAttribute("data-product-attribute-name"), tile.getAttribute("data-product-attribute-value"));
+                tile.classList.add("active");
+                attributeSelected = true;
+                });
+            });
+        }
+
+        // storing picklist values
+        const psmTiles = document.querySelectorAll('.tile-psm');
+        let psmMap = new Map();
+        let psmSelected = false;
+        if (psmTiles) {
+            psmTiles.forEach((tile) => {
+                tile.addEventListener('click', () => {
+                    psmTiles.forEach((tile) => {
+                    tile.classList.remove("active");
+                });
+                console.log(tile.getAttribute("data-product-psm-id"));
+                if (tile.getAttribute("data-product-psm-id") && tile.getAttribute("data-product-psm-name")) {
+                    psmMap.set(tile.getAttribute("data-product-psm-id"), tile.getAttribute("data-product-psm-name"));
+                }
+                tile.classList.add("active");
+                psmSelected = true;
+                });
+            });
+        }
+
+        // storing non picklist values
+        var links = document.querySelectorAll(".default-tile");
+            
+        for (var i = 0; i < links.length; i++) {
+            attributeDefinitionMap.set(links[i].getAttribute("data-product-attribute-default-name"), 
+            links[i].getAttribute("data-product-attribute-default-value"));
+        }
+    </script>
+    <%- include('footer') %>
+</body>
+
+</html>

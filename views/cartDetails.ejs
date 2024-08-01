@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cart | Badger Parts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/lib/cartUtils.js" type="text/javascript"/>
+    <style>
+        .error-message {
+            display:none;
+            color: red;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <%- include('header', {totalItemsInCart: totalItemsInCart, categories: categories, activeCategoryName: "", page: "cart"}) %>
+            <div class="container cart__details"> 
+                <ul class="products list-unstyled test-home">
+                    <div class="container">
+                        <h1 class="page-heading page-heading_h1 page-heading_m-h1">Cart</h1>
+                        <% if (cartData.length > 0) {%>
+                            <div class="d-flex justify-content-between p-3 cartButtonsContainer">
+                                <div>
+                                    <button class="btn btn-secondary clearCartBtn" onclick=clearUserCart()>Reset Cart</button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary ms-4 repriceCartButton">Reprice Cart</button>
+                                    <button class="btn btn-primary ms-4" onclick="showOrderConfirmation()">Check Out</button>
+                                </div>
+                            </div>
+                        <% } %>
+                        <div class="card border-top-0">
+                            <div class="card-body p-0">
+                                <% if (cartData.length > 0) {%>
+                                    <table id="customers" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Product</th>
+                                                <th scope="col" class="text-center">Quantity</th>
+                                                <th scope="col" class="text-center" colspan="2">Additional Discount</th>
+                                                <th scope="col" class="text-end netUnitPriceColHeader">Net Unit Price</th>
+                                                <th scope="col" class="text-end">Sub-total</th>
+                                                <th scope="col">
+                                                    <button class="btn btn-link invisible">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for( let i=0; i < cartData.length; i++ ) { %>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <% if (cartData[i].displayUrl) {%>
+                                                                <img src="<%= cartData[i].displayUrl%>" class="cart-img-top" alt="<%= cartData[i].name %>">  
+                                                            <% } else {%>
+                                                                <div class="cart-img-top dummyImgCart"></div>
+                                                            <% } %>
+                                                                <div>
+                                                                    <a href="/product/<%= cartData[i].productId %>" class="btn btn-link"><%= cartData[i].name %></a>
+                                                                    <div class="mt-2 small">
+                                                                    <%if (cartData[i].productAttributes.length > 0) {%>
+                                                                        <% for( let j=0; j < cartData[i].productAttributes.length; j++ ) { %>
+                                                                            <div><%= cartData[i].productAttributes[j].name %> -- <%= cartData[i].productAttributes[j].value %></div>
+                                                                        <% } %>
+                                                                    <% } else {%>
+                                                                        -----
+                                                                    <% } %>
+                                                                    </div>
+                                                                    <div class="mt-2 small">
+                                                                        <%if (cartData[i].psm && cartData[i].psm.length > 0) {%>
+                                                                                <div>PSM: <%= cartData[i].psm[0].value %> %></div>
+                                                                        <% } else {%>
+                                                                            -----
+                                                                        <% } %>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </td>
+                                                    <td align="right">
+                                                        <div class="price-and-buy__qty input-group">
+                                                            <button type="button" id="decrement-count" class="btn btn-secondary text-center px-3 greyBorder" onclick="decrementCount(<%= i %>)">
+                                                                <svg
+                                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                                    data-icon="minus" class="svg-inline--fa fa-minus fa-w-14 "
+                                                                    role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="20">
+                                                                    <path fill="currentColor"
+                                                                        d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                                                                    </path>
+                                                                </svg>
+                                                            </button>
+                                                            <input type="number" name="inputValue" id="productCount_<%= i %>" class="form-control greyBorder" min="1" value="<%= cartData[i].quantity %>">
+                                                            <button type="button" id="increment-count" class="btn btn-secondary text-center px-3 greyBorder" onclick=incrementCount(<%= i %>)><svg
+                                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                                data-icon="plus" class="svg-inline--fa fa-plus fa-w-14 " role="img"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="20">
+                                                                <path fill="currentColor"
+                                                                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                                                                </path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td align="right">
+                                                        <select id="mySelect_<%= i %>" value="2" class="form-select customSelect" aria-label="Default select example">
+                                                            <option value="">Select Type</option>
+                                                            <%if (cartData[i].discountType === 'Percentage') {%><option selected value="Percentage">Percentage</option><% } else {%>
+                                                                <option value="Percentage">Percentage</option>
+                                                                <% } %>
+                                                            <%if (cartData[i].discountType === 'Amount') {%> <option selected value="Amount">Amount</option> <% } else {%>
+                                                                <option value="Amount">Amount</option>
+                                                            <% } %>
+                                                            <%if (cartData[i].discountType === 'Override') {%> <option selected value="Override">Override</option> <% } else {%>
+                                                                <option value="Override">Override</option>
+                                                            <% } %>
+                                                            
+                                                          </select>
+                                                        </td>
+                                                    <td align="right">
+                                                        <input class="form-control  form-control-sm customInput" type="text" placeholder="enter discount value" value="<%= cartData[i].discountValue %>" aria-label=".form-control-sm example">
+                                                        </td>
+                                                    <td align="right">
+                                                         <%= cartData[i].unitPrice %>
+                                                        <button type="button" id="myBtn_<%= i %>" class="btn btn-sm btn-link btnPricing ms-3" data-bs-toggle="modal" data-bs-target="#myModal_<%= i %>" onclick=displayPricing(<%= i %>)>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#414450" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                    <td align="right"> <%= cartData[i].total %></td>
+                                                    <td class="pe-4 text-end">
+                                                        <button class="clearCartItemBtn btn btn-link" data-user-cart-id="<%= cartData[i].userCartId %>">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#414450" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
+                                            <tr class="totalRow">
+                                                <td class="ps-4"><b>Total Amount</b></td>
+                                                <td align="right"></td>
+                                                <td align="right"></td>
+                                                <td align="right"><b> <%= cartTotal %> </b></td>
+                                                <td align="right"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <% for( let i=0; i < cartData.length; i++ ) { %>
+                                        <div id="myModal_<%= i %>" class="modal fade" tabindex="-1" aria-hidden="true" aria-label="<%= cartData[i].name%> - Pricing Details">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content"> 
+                                                    <%- include('waterfall', {waterfallInput: cartData[i].waterfallInput, productName: cartData[i].name}) %> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                    <div class="text-end mb-4 me-4">
+                                        <button class="btn btn-primary ms-4 repriceCartButton" onclick="showOrderConfirmation()">Checkout</button>
+                                    </div>
+                                    <div class="error-message" id="errorMessageContainer"></div>
+                                <% } else {%>
+                                    <h4 class="p-4">Cart is empty</h4>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
+
+            <script>
+                const errorMessageContainer = document.querySelector('#errorMessageContainer');
+                const errorMessage = '<%= errorMessage %>';
+
+                if (errorMessage) {
+                    /*errorMessageContainer.textContent = errorMessage;
+                    errorMessageContainer.style.display = 'block';
+
+                    setTimeout(() => {
+                        errorMessageContainer.style.display = 'none';
+                        errorMessageContainer.textContent = '';
+                    }, 3000);*/
+                    showToastMessage(errorMessage, 'error');
+                }
+
+                var index=0;
+                function incrementCount(i){
+                    const productCountEl = document.querySelector('#productCount_'+i);
+                    const productCount = Number(productCountEl.value);
+                    if(!isNaN(productCount)) {
+                        productCountEl.value = productCount+1;
+                    }
+                }
+
+                function decrementCount(i){
+                    const productCountEl = document.querySelector('#productCount_'+i);
+                    const productCount = Number(productCountEl.value);
+                    if(!isNaN(productCount)) {
+                        if(productCount>1)
+                            productCountEl.value = productCount-1;
+                    }
+                }
+
+                function displayPricing(i){
+                    index=i;
+                    var modal = document.getElementById("myModal_"+i);
+                    var closeBtn = document.getElementsByClassName("btn-close")[i];
+
+                    document.getElementById("backdrop").style.display = "block"
+                    modal.style.display = "block";
+                    modal.classList.add("show");
+                    
+                    closeBtn.onclick = function() {
+                        modal.style.display = "none";
+                        modal.classList.remove("show");
+                        document.getElementById("backdrop").style.display = "none";
+                    }
+                }
+
+                const buttons = document.querySelectorAll('.clearCartItemBtn');
+                const repriceCartButton = document.querySelector('.repriceCartButton');
+                buttons.forEach(button => {
+                    button.onclick = async function() {
+                        button.disabled = true;
+                        const userCartId = button.getAttribute('data-user-cart-id');
+                        const cartItemsCount = await removeFromCart(userCartId);
+
+                        /* reloading page, couldn't find an efficient way to just remove a single item from cart */
+                        location.reload();
+                    };
+                });
+
+                const clearCartButton = document.querySelector('.clearCartBtn');
+
+                clearCartButton.onclick = async function() {
+                    clearCartButton.disabled = true;
+                    await clearUserCart();
+                    location.reload();
+                };
+
+                var itemDetails = {};
+                var quantityMap = new Map();
+                function showMessage(el, text) {
+                    el.innerText = text;
+                    el.style.display = 'block';
+                    setTimeout(() => {
+                        el.style.display = 'none';
+                        el.innerText = '';
+                    }, 3000);
+                };
+                const repriceErrorMessage = document.getElementById('errorMessageContainer');
+                repriceCartButton.onclick = async function() {
+                    repriceCartButton.disabled = true;
+                    for(var i=0; i<document.querySelectorAll('.clearCartItemBtn').length; i++){
+                        if(!document.querySelectorAll('.form-control-sm')[i].value && document.querySelector('#mySelect_'+i).value){
+                            showToastMessage('Error: Please Enter Discount Value', 'error');
+                            repriceCartButton.disabled = false;
+                            return;
+                        }
+                        if(document.querySelectorAll('.form-control-sm')[i].value && !document.querySelector('#mySelect_'+i).value){
+                            showToastMessage('Error: Please Select Discount Type', 'error');
+                            repriceCartButton.disabled = false;
+                            return;
+                        }
+                        itemDetails.quantity = document.querySelector('#productCount_'+i).value;
+                        itemDetails.discountType = document.querySelectorAll('.customSelect')[i].value;
+                        itemDetails.discountValue = document.querySelectorAll('.form-control-sm')[i].value;
+                        quantityMap.set( 
+                            document.querySelectorAll('.clearCartItemBtn')[i].getAttribute('data-user-cart-id'),
+                            itemDetails
+                        );
+                        itemDetails = {};
+                    }
+                    
+                    const response = await updateToCart(quantityMap);
+                    if (response && response.status === 302) {
+                        const responseData = await response.json();
+                        if (responseData.success) {
+                            itemDetails = {};
+                            quantityMap = new Map();
+                            location.reload();
+                        } else {
+                            console.error('Something went wrong');
+                            //showMessage(repriceErrorMessage, 'Something went wrong');
+                            showToastMessage('Something went wrong', 'error');
+                        }
+                    } else {
+                        console.error('Error updating quantity to cart!');
+                        //showMessage(repriceErrorMessage, 'Error: Unable to Reprice');;                        
+                        showToastMessage('Error: Unable to Reprice', 'error');
+                    }
+                    repriceCartButton.disabled = false;
+                };
+
+                function showOrderConfirmation() {
+                    window.location.href = '/order/1';
+                }
+            </script>
+            
+            <%- include('footer') %>
+</body>
+</html>

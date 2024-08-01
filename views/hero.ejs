@@ -1,0 +1,33 @@
+
+<div class="cover-text-center" style="margin-top: -1px;">
+    <div class="cover-text-center__wrapper cover-text-center__wrapper_fixed">
+        <div class="cover-text-center__bg-img"
+            style="background-image:url(/assets/images/dummyImg.jpg)">
+        </div>
+        <div class="cover-text-center__shadow" style="opacity:0.6;background-color:#16171D"></div>
+        <div class="cover-text-center__content">
+            <div class="cover-text-center__content-container container" href="#">
+                <h1 class="cover-text-center__content-intro">
+                    <% if(activeCategoryName === 'Home') {%>
+                        Innovate with Badger Equipment
+                    <%} else {%>
+                        Innovate with <%= activeCategoryName %>
+                    <% } %>
+                </h1>
+                <div class="cover-text-center__content-sub-header text-center">
+                    Badger Equipment is a single stop solution which offers you a seamless access to products for all your infrastructure and networking needs. 
+                    Customers and partners can easily login to access our wide catalog of products and manage their purchases.
+                </div>
+            </div>
+        </div>
+        <!--<a href="#" class="cover-text-center__down">
+            <svg aria-hidden="true" focusable="false"
+                data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down fa-w-14 " role="img"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+                </path>
+            </svg>
+        </a>-->
+    </div>
+</div>

@@ -1,0 +1,119 @@
+.horizontal-menu {
+    background-color: #fff;
+    /*border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;*/
+    box-shadow: 0px 4px 10px 0px rgba(171, 171, 171, 0.15);
+}
+header.page__header{
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.page-header-container {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.horizontal-menu .horizontal-menu__list .horizontal-menu__root-element .underline {
+	height: 4px;
+	background-color: transparent;
+	width: 0%;
+	transition: width 0.2s, background-color 0.5s;
+	margin: 0 auto;
+    margin-top: -4px;
+}
+
+.horizontal-menu .horizontal-menu__list .horizontal-menu__root-element.active-link .horizontal-menu__element {
+    font-weight: bold;
+    color: var(--cool-grey-20);
+}
+
+.horizontal-menu .horizontal-menu__list .horizontal-menu__root-element:hover .horizontal-menu__element {
+    color: var(--cool-grey-30);
+}
+
+.horizontal-menu .horizontal-menu__list .horizontal-menu__root-element.active-link .underline {
+	width: 100%;
+	background-color: var(--red-40);
+}
+
+.horizontal-menu__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 0
+}
+
+.horizontal-menu__element {
+    align-items: center;
+    display: flex
+}
+
+.horizontal-menu__element.is-link {
+    color: var(--cool-grey-10);
+    text-decoration: none
+}
+
+.horizontal-menu__element.is-child {
+    padding: 10px 15px;
+    white-space: nowrap
+}
+
+.horizontal-menu__element.is-root {
+    font-size: 16px;
+    text-transform: capitalize;
+    padding: 12px;
+}
+
+.horizontal-menu__element.is-root .title {
+    line-height: 24px
+}
+
+.horizontal-menu__child-list {
+    background-color: #fff;
+    margin-top: 15px;
+    position: absolute;
+    width: 220px;
+    z-index: 10
+}
+
+.horizontal-menu__child-list.animate__animated.animate__fadeInUp,.horizontal-menu__child-list.animate__animated.animate__fadeOut {
+    --animate-duration: 0.4s
+}
+
+.horizontal-menu__child-element {
+    border: solid #eee;
+    border-width: 1px 1px 0
+}
+
+.horizontal-menu__child-element:last-child {
+    border-bottom-width: 1px
+}
+.cart-header__qty {
+    background: var(--red-40);
+    width: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    font-weight: 500;
+    left: 50%;
+    position: absolute;
+    top: -15%;
+    transition: background-color .35s ease-in-out
+}
+  .page-header__moon-cart {
+    padding: 11px 11px 0 0;
+}
+
+.page-header__moon-cart .cart-header__total {
+    display: none
+}
+
+.page-header__moon-cart .cart-header__qty {
+    font-weight: 400;
+    font-size: 12px;
+}

@@ -1,0 +1,68 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/header.css" />
+<header class=" page__header">
+    <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-0 page-header-container">
+        <div class="page-header__logo-wrapper d-flex align-items-center col-md-9 mb-2 mb-md-0 text-decoration-none">
+            <a class="page-header__logo-link" href="/">
+                <span>Badger
+                    Parts</span></a>
+        </div>
+        <div class="col-md-3 text-end">
+            <div class="mr-3 cart-items">
+                <a class="cart-header cart-header_active page-header__moon-cart <% if(page == 'cart') {%>active<% } %>" href="/cart" title="Cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#16171D" class="bi bi-cart2" viewBox="0 0 16 16">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                    </svg>
+                    <b class="cart-header__qty" id="cartItemsCount"><%= totalItemsInCart %></b>
+                </a>
+                <a class="cart-header cart-header_empty <% if(page == 'settings') {%>active<% } %>" href="/settings" title="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#16171D" class="bi bi-gear" viewBox="0 0 16 16">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                </a>
+                <a class="cart-header cart-header_empty <% if(page == 'profile') {%>active<% } %>" href="/login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#16171D" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <nav class="horizontal-menu">
+        <div class="container">
+            <ul class="horizontal-menu__list list-unstyled" itemscope="" itemtype="//schema.org/ItemList">
+                <% if(categories && categories.length > 0) { %>
+                    <li class="horizontal-menu__root-element <% if(activeCategoryName === 'Home') {%>active-link<% } %>">
+                        <div itemprop="itemListElement" itemscope="" itemtype="//schema.org/ListItem">
+                            <a class="horizontal-menu__element is-link is-root" href="/">
+                                <span class="title" itemprop="name">Home</span>
+                            </a>
+                            <meta itemprop="position" content="1">
+                        </div>
+                        <div class="underline"></div>
+                    </li>
+                    <% for( let i=0; i < categories.length; i++ ) { %>
+                        <li class="horizontal-menu__root-element <% if(activeCategoryName === categories[i].categoryName) {%>active-link<% } %>">
+                            <div itemprop="itemListElement" itemscope="" itemtype="//schema.org/ListItem">
+                                <a class="horizontal-menu__element is-link is-root"
+                                    href="/?categoryId=<%= categories[i].categoryId %>">
+                                    <span class="title" itemprop="name">
+                                        <%= categories[i].categoryName %>
+                                    </span></a>
+                                <meta itemprop="position" content="1">
+                            </div>
+                            <div class="underline"></div>
+                        </li>
+                    <% } %>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="toast fade position-fixed p-0 align-items-center text-white border-0" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            
+        </div>
+    </div>
+</div>

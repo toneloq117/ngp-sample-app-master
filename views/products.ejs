@@ -1,0 +1,5 @@
+<ul class="products list-unstyled test-home">
+		<% for( let i = 0; i < products.length; i++ ) { %>
+			<%- include('productCard', {product: products[i]}) %>
+		<% } %>
+	</ul>

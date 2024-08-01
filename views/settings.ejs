@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings | Badger Parts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        .success-message {
+            display:none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            display:none;
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <%- include('header', {totalItemsInCart: totalItemsInCart, categories: categories, activeCategoryName: "", page: "settings"}) %>
+        <div class="container cart__details">
+            <div class="container">
+                <h1 class="page-heading page-heading_h1 page-heading_m-h1">Settings</h1>
+                <div class="row">
+                    <div class="col col-lg-10 offset-md-1">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="flexbox">
+                                    <div class="tab-content col-lg-12 column" id="v-pills-tabContent">
+                                        <div>
+                                            <form onsubmit="savePref(event)">
+                                                <input type="hidden" id="pricingProcedureId" name="pricingProcedureId" value="<%= prefData.pricingProcedureId %>" />
+                                                <input type="hidden" id="contextDefinitionId" name="contextDefinitionId" value="<%= prefData.contextDefinitionId %>" />
+                                                <input type="hidden" id="contextMappingId" name="contextMappingId" value="<%= prefData.contextMappingId %>" />
+                                                <input type="hidden" id="accountId" name="accountId" value="<%= prefData.accountId %>" />
+                                                <% if (mode === 'edit') { %>
+                                                    <div class="mb-4">
+                                                        <label for="accountInput" class="form-label">Account</label>
+                                                        <select id="accountInput" name="account" class="form-select">
+                                                            <% accounts && accounts.length > 0 && accounts.forEach(account => { %>
+                                                                <option value="<%= account.Account__r.Id %>" <%= account.Account__r.Id === prefData.accountId ? 'selected' : '' %>><%= account.Account__r.Name %> - <%=account.Region__c %> (<%=account.MembershipStatus__c %>)</option>
+                                                            <% }); %>
+                                                        </select>
+                                                        <% accounts && accounts.length > 0 && accounts.forEach(account => { %>
+                                                            <input type="hidden" id="accountRegion<%=account.Account__r.Id%>" name="accountRegion<%=account.Account__r.Id%>" value="<%=account.Region__c%>" />
+                                                            <input type="hidden" id="accountMembershipStatus<%=account.Account__r.Id%>" name="accountMembershipStatus<%=account.Account__r.Id%>" value="<%=account.MembershipStatus__c%>" />
+                                                        <% }); %>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div class="mb-4">
+                                                        <label for="account" class="form-label">Account</label>
+                                                        <input type="text" id="accountName" name="accountName" class="form-control" value="<%= prefData.accountName %>" readonly />
+                                                    </div>
+                                                <% } %>
+                                                <% if (mode === 'edit') { %>
+                                                    <div class="mb-4">
+                                                        <label for="pricingProcedureInput" class="form-label">Default Pricing Procedure</label>
+                                                        <select id="pricingProcedureInput" name="pricingProcedureInput" class="form-select">
+                                                        <% pricingProcedures && pricingProcedures.length > 0 && pricingProcedures.forEach(procedure => { %>
+                                                            <option value="<%= procedure.pricingProcedureId %>" <%= procedure.pricingProcedureId === prefData.pricingProcedureId ? 'selected' : '' %>><%= procedure.pricingProcedureName %></option>
+                                                        <% }); %>
+                                                        </select>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div class="mb-4">
+                                                        <label for="pricingProcedureName" class="form-label">Default Pricing Procedure</label>
+                                                        <input type="text" id="pricingProcedureName" name="pricingProcedureName" class="form-control" value="<%= prefData.pricingProcedureName %>" readonly/>
+                                                    </div>
+                                                <% } %>
+                                                <div class="mb-4">
+                                                    <label for="contextDefinitionName" class="form-label">Default Context Definition</label>
+                                                    <input type="text" id="contextDefinitionName" name="contextDefinitionName" class="form-control" value="<%= prefData.contextDefinitionName %>" readonly />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="contextMappingName" class="form-label">Default Context Mapping</label>
+                                                    <input type="text" id="contextMappingName" name="contextMappingName" class="form-control" value="<%= prefData.contextMappingName %>" readonly/>
+                                                </div>
+                                                <% if (mode === 'edit') { %>
+                                                    <div class="text-end">
+                                                        <button class="btn btn-secondary" id="cancelEditingPreferencesBtn" onclick="handleCancelClick(event)">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary ms-3">Save</button>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div class="text-end">
+                                                        <button class="btn btn-primary" id="editPreferencesBtn" onclick="handleEditClick(event)">Edit</button>
+                                                    </div>
+                                                <% } %>
+                                                <div class="success-message" id="prefSuccessMessage">
+                                                </div>
+                                                <div class="error-message" id="prefErrorMessage">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('footer') %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+            function showToastMessage(message, type) {
+                const typeCls = type === 'success' ? 'bg-success' : type === 'error' ? 'bg-danger' : 'bg-primary';
+                const toast = document.querySelector('#toast');
+                toast.querySelector('.toast-body').innerText = message;
+                toast.classList.add(typeCls);
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    toast.classList.remove(typeCls);
+                    toast.querySelector('.toast-body').innerText = "";
+                }, 3000);
+            }
+            function showMessage(el, text) {
+                el.innerText = text;
+                el.style.display = 'block';
+
+                setTimeout(() => {
+                    el.style.display = 'none';
+                    el.innerText = '';
+                }, 3000);
+            }
+
+            function handleCancelClick(event) {
+                event.preventDefault();
+                window.location.href = '/settings?mode=view';
+            }
+
+            function handleEditClick(event) {
+                event.preventDefault();
+                window.location.href = '/settings?mode=edit';
+            }
+
+            const prefSuccessMessage = document.getElementById('prefSuccessMessage');
+            const prefErrorMessage = document.getElementById('prefErrorMessage');
+            const saveResult = '<%= saveResult %>';
+            if (saveResult === 'SUCCESS') {
+                const message = '<%= locals.message %>' || 'Preferences saved successfully!';
+                //showMessage(prefSuccessMessage, message);
+                showToastMessage(message, 'success');
+            }
+
+            async function savePref(e) {
+                e.preventDefault();
+
+                const pricingProcedureDD = e.target.pricingProcedureInput;
+                const accountDD = e.target.accountInput;
+                if (
+                    (pricingProcedureDD.value === '' || pricingProcedureDD.value === e.target.pricingProcedureId.value)
+                    && (accountDD.value === '' || accountDD.value === e.target.accountId.value)
+                    ) {
+                    //showMessage(prefErrorMessage, 'No changes have been done!');
+                    showToastMessage('No changes have been done!', 'error');
+                    return;
+                }
+
+                const selectedPricingProcedure = pricingProcedureDD.options[pricingProcedureDD.selectedIndex];
+                const pricingProcedureId = selectedPricingProcedure.value;
+                const pricingProcedureName = selectedPricingProcedure.textContent;
+
+                const selectedAccount = accountDD.options[accountDD.selectedIndex];
+                const accountId = selectedAccount.value;
+                const accountName = selectedAccount.textContent;
+
+                const accountRegion = document.querySelector(`#accountRegion${accountId}`).value;
+                const accountMembershipStatus = document.querySelector(`#accountMembershipStatus${accountId}`).value;
+
+                const body = [
+                    {
+                        prefKey: 'DEFAULT_CONTEXT_DEFINITION',
+                        prefValue: e.target.contextDefinitionId.value,
+                        UserPreferenceDetail: {
+                            prefDetailProperty: 'contextName',
+                            prefDetailValue: e.target.contextDefinitionName.value
+                        }
+                    },
+                    {
+                        prefKey: 'DEFAULT_CONTEXT_MAPPING',
+                        prefValue: e.target.contextMappingId.value,
+                        UserPreferenceDetail: {
+                            prefDetailProperty: 'contextMappingName',
+                            prefDetailValue: e.target.contextMappingName.value
+                        }
+                    },
+                    {
+                        prefKey: 'DEFAULT_PRICING_PROCEDURE',
+                        prefValue: pricingProcedureId,
+                        UserPreferenceDetail: {
+                            prefDetailProperty: 'pricingProcedureName',
+                            prefDetailValue: pricingProcedureName
+                        }
+                    },
+                    {
+                        prefKey: 'DEFAULT_ACCOUNT',
+                        prefValue: accountId,
+                        UserPreferenceDetail: {
+                            prefDetailProperty: 'accountName',
+                            prefDetailValue: accountName
+                        }
+                    },
+                    {
+                        prefKey: 'DEFAULT_ACCOUNT_REGION',
+                        prefValue: accountRegion
+                    },
+                    {
+                        prefKey: 'DEFAULT_ACCOUNT_MEMBERSHIP_STATUS',
+                        prefValue: accountMembershipStatus
+                    }
+                ];
+
+                const response = await fetch('/settings', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.status === 201) {
+                    const responseData = await response.json();
+                    if (responseData.redirectUrl) {
+                        window.location.href = responseData.redirectUrl;
+                    } else {
+                        console.error('Something went wrong');
+                        //showMessage(prefErrorMessage, 'Something went wrong');
+                        showToastMessage('Something went wrong', 'error');
+                    }
+                } else {
+                    console.error('Error saving Preferences!');
+                    //showMessage(prefErrorMessage, 'Error saving Preferences!');
+                    showToastMessage('Error saving Preferences!', 'error');
+                }
+            };
+
+            /* code to dynamically populate ctx id and mapping on the basis of selected procedure */
+            $('#pricingProcedureInput').change(async function() {
+                const selectedValue = $(this).val();
+                /*const contextMapping = await getContextMappingByProcedureId(selectedValue);
+                $('#contextDefinitionName').val(contextMapping.contextDefinitionName);
+                $('#contextMappingName').val(contextMapping.contextMappingName);*/
+            });
+        </script>
+</body>
+
+</html>

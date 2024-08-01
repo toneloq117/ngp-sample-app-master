@@ -1,0 +1,11 @@
+node_modules
+server.cert
+server.key
+.env
+local-storage
+.DS_Store
+**/.DS_Store
+public/.DS_Store
+public/assets/.DS_Store
+public/assets/images/.DS_Store
+.vscode/launch.json

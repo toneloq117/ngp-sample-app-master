@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h3 class="modal-title"><%= productName %> - Pricing Details</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<% if (waterfallInput) {%>
+    <table width="100%" class="content-table">
+        <thead>
+            <tr class="content-table thead tr">
+                <th>Price Details</th>
+                <th>Description</th>
+                <th class="text-end">Net Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let i=0; i < waterfallInput.waterfall.length; i++ ) { %>                    
+                <tr>                                    
+                    <td >
+                        <%= waterfallInput.waterfall[i].pricingElement.name %>
+                    </td>
+                    <td>
+                        <% if (waterfallInput.waterfall[i].adjustmentDesc) {%>
+                            <% if (waterfallInput.waterfall[i].override) {%>
+                                <p><s> <%= waterfallInput.output.elementListPrice %> </s></p>
+                            <% } %>
+                            <%= waterfallInput.waterfall[i].adjustmentDesc %>
+                        <% } else {%>
+                            <%= waterfallInput.waterfall[i].pricingElement.name %>
+                        <% } %>    
+                    </td>
+                    <td align="right">
+                        <% if (waterfallInput.waterfall[i].outputParameters.NetUnitPrice) {%>
+                                <%= waterfallInput.waterfall[i].outputParameters.NetUnitPrice %>
+                        <% } else {%>
+                                <%= waterfallInput.waterfall[i].outputParameters.ListPrice %>
+                        <% } %>
+                    </td>
+                </tr>
+            <% } %>
+            <tr >
+                <td>
+                    <b>Sub-total</b>
+                </td>
+                <td>
+                    <b>Per unit price x <%= waterfallInput.output.quantity %>  <%= waterfallInput.output.units %></b>
+                </td>
+                <td align="right">
+                    <b> <%= waterfallInput.output.totalListAmount %></b>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<% } else {%>
+    <h4 class="mt-5">Waterfall is empty</h4>
+<% } %>
